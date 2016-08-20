@@ -113,7 +113,13 @@ if [ -x "/etc/init.d/<%= project_name %>" ]; then
 	if [ ! -e "/etc/init/<%= project_name %>.conf" ]; then
 		update-rc.d <%= project_name %> defaults >/dev/null
 	fi
-	invoke-rc.d <%= project_name %> start || exit $?
+    if [ -d "/var/run/<%= project_name %>" ]; then
+        if [ -e "/var/run/<%= project_name %>/<%= project_name %>.pid" ]; then
+            if [ -d "/proc/$(cat '/var/run/<%= project_name %>/<%= project_name %>.pid')" ]; then
+                echo "You must restart <%= project_name %> manually for any changes to take effect!"
+            fi
+        fi
+    fi
 fi
 # End automatically added section
 # Automatically added by dh_makeshlibs
