@@ -9,7 +9,7 @@ description "Fluentd: A data collector for ZipRecruiter"
 
 install_dir     "/opt/fluentd"
 build_version   "2.3.1"
-build_iteration 2
+build_iteration 3
 
 # creates required build directories
 dependency "preparation"
